@@ -13,11 +13,5 @@ export class App {
 
   constructor(private api: ApiService) { }
 
-  testLogin() {
-    this.api.login('admin', 'admin123').subscribe({
-      next: (res) => console.log('Login sucesso:', res),
-      error: (err) => console.error('Erro no login:', err)
-    });
-  }
 
 }
