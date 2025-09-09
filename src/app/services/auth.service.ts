@@ -9,8 +9,17 @@ export class AuthService {
     private http = inject(HttpClient);
     private router = inject(Router);
 
-    token = signal<string | null>(null);
+    token = signal<string | null>(localStorage.getItem('token'));
     user = signal<any>(null);
+
+    constructor() {
+        
+        const savedToken = localStorage.getItem('token');
+        if (savedToken) {
+            this.token.set(savedToken);
+            this.loadUserProfile(savedToken);
+        }
+    }
 
     login(username: string, password: string): Observable<any> {
         return this.http.post('http://localhost:5000/api/auth/login', { username, password }).pipe(
@@ -39,5 +48,23 @@ export class AuthService {
     isLogged(): boolean {
         return !!this.token();
     }
+
+    getCurrentUser() {
+        return this.user();
+    }
+
+    getToken() {
+        return this.token();
+    }
+
+    private loadUserProfile(token: string) {
+    
+    this.http.get('http://localhost:5000/api/auth/profile', {
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: (res: any) => this.user.set(res.user),
+      error: () => this.logout(), 
+    });
+  }
 
 }

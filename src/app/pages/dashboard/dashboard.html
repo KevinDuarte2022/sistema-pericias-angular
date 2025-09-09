@@ -1,2 +1,37 @@
-<p>Bem vindo ao dashboard</p>
-<button (click)="doLogout()">Logout</button>
+<div class="dashboard-container">
+ 
+  <header class="topbar flex items-center justify-between p-4 bg-blue-600 text-white">
+    <img src="assets/logo-galileu-login.png" alt="Galileu - Sistema de Perícias" class="w-24 h-auto">
+    <div class="user-info">
+      <span>{{ authService.user()?.username }}</span> - <small>{{ authService.user()?.roles.join(', ') }}</small>
+    </div>
+  </header>
+
+  <div class="main-content flex">
+   
+    <nav class="sidebar w-64 bg-gray-100 p-4">
+      <ul>
+        <li >Cadastros</li>
+        <li >Estatísticas</li>
+        <li >Relatórios</li>
+        <li >Configurações</li>
+        <li (click)="doLogout()">Logout</li>
+      </ul>
+    </nav>
+
+  
+    <section class="content flex-1 p-6 bg-gray-50">
+      <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+
+    
+      <div class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" *ngIf="dashboardService.stats() as stats">
+        <div class="card bg-white shadow p-4 rounded" *ngFor="let key of statKeys">
+          <h3 class="font-semibold">{{ key }}</h3>
+          <p class="text-2xl font-bold">{{ stats[key] }}</p>
+        </div>
+      </div>
+
+      <p *ngIf="!dashboardService.stats()">Carregando estatísticas...</p>
+    </section>
+  </div>
+</div>
