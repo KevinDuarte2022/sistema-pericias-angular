@@ -40,7 +40,7 @@ export class Login {
       next: () => {
         this.loading = false;
         this.msg.add({ severity: 'success', summary: 'Bem-vindo', detail: this.authService.user()?.username ?? 'Usuário' });
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['']);
       },
       error: (err) => {
         this.loading = false;

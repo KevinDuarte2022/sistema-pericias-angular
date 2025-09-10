@@ -28,7 +28,7 @@ export class AuthService {
                 this.user.set(res.user);
                 localStorage.setItem('token', res.access_token);
 
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['']);
             })
 
         );

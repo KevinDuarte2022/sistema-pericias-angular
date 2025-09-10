@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { DashboardService } from '../../services/dashboard-service';
 import { NgFor, NgIf } from '@angular/common'; 
+import { TabsModule } from 'primeng/tabs';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgIf, NgFor],
+  imports: [NgIf, NgFor, TabsModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
