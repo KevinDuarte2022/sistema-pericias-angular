@@ -26,3 +26,9 @@
   background-size: cover, cover; 
   background-attachment: fixed; 
 }
+
+
+.p-password-input {
+  background-color: gray !important;
+
+}

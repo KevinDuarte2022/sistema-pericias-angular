@@ -15,9 +15,10 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ImageModule } from 'primeng/image';
 
 
+
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CardModule, InputTextModule, ButtonModule, ImageModule],
+  imports: [FormsModule, CardModule, InputTextModule, ButtonModule, ImageModule, ToastModule, PasswordModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
   providers: [MessageService, provideAnimations()],
