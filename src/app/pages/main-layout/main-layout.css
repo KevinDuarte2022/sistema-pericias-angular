@@ -27,6 +27,24 @@
   background:#000312;
   padding: 1rem;
   border-right: 1px solid #ddd;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+  position: fixed;
+  top: 64px; 
+  left: 0;
+  bottom: 0; 
+  width: 200px;
+  z-index: 1000;
+  height: auto; 
+}
+
+.sidebar.open {
+  transform: translateX(0);
+  position: relative;
+  bottom: 0;
 }
 
 .sidebar ul {
