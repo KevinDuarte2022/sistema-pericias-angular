@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+// src/app/components/loader/loader.ts
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-loader',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './loader.html',
-  styleUrl: './loader.css'
+  styleUrls: ['./loader.css']
 })
 export class Loader {
-
+  @Input() show = false;
 }

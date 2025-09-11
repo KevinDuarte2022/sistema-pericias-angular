@@ -14,11 +14,11 @@ import { MessageService } from 'primeng/api';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ImageModule } from 'primeng/image';
 
-
+import { Loader } from '../../components/loader/loader';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CardModule, InputTextModule, ButtonModule, ImageModule, ToastModule, PasswordModule],
+  imports: [FormsModule, CardModule, InputTextModule, ButtonModule, ImageModule, ToastModule, PasswordModule, Loader, CommonModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
   providers: [MessageService, provideAnimations()],
@@ -32,6 +32,8 @@ export class Login {
 
 
   doLogin() {
+
+
     if (!this.username || !this.password) {
       this.msg.add({ severity: 'warn', summary: 'Campos obrigatórios', detail: 'Informe usuário e senha' })
       return;
@@ -39,10 +41,12 @@ export class Login {
     this.loading = true;
     this.authService.login(this.username, this.password).subscribe({
       next: () => {
-        this.loading = false;
-        this.msg.add({ severity: 'success', summary: 'Bem-vindo', detail: this.authService.user()?.username ?? 'Usuário' });
-        this.router.navigate(['']);
-      },
+        
+          this.loading = false;
+          this.msg.add({ severity: 'success', summary: 'Bem-vindo', detail: this.authService.user()?.username ?? 'Usuário' });
+          this.router.navigate(['']);
+        }, 
+ 
       error: (err) => {
         this.loading = false;
         const detail = err?.error?.error || 'Falha ao autenticar';

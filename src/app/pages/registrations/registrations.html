@@ -1,30 +1,123 @@
-<p-tabs value="0">
-    <p-tablist>
-        <p-tab value="0">Cadastrar Usuário</p-tab>
-        <p-tab value="1">Cadastrar Processos</p-tab>
-    </p-tablist>
-    <p-tabpanels>
-        <p-tabpanel value="0">
-            <div>
-                <h2 class="text-2xl font-bold mb-4">Listagem de usuários</h2>
-                <li>João Pereira</li>
-                <li>Jordão Coelho</li>
-                <li>Emerson Oliveira</li>
-                <li>Rafael César</li>
-                <br>
-                <p>(Tela de teste até o momento)</p>
+<div>
+
+ 
+    <h2 class="text-2xl font-bold mb-2">Cadastrar Solicitação</h2>
+
+    
+    <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-success mb-4"
+        (click)="openNewCard()">
+    </button>
+
+    
+    <p-card *ngIf="showCard" class="mb-4" [header]="editingSolicitacao ? 'Editar Solicitação' : 'Nova Solicitação'">
+        <form (ngSubmit)="saveSolicitacao()" class="p-fluid grid formgrid">
+
+            
+            <div class="field col-12 md:col-4">
+                <label for="data">Data</label>
+                <input id="data" type="date" pInputText [(ngModel)]="currentSolicitacao.data" name="data" required />
+                <label for="hora">Hora</label>
+                <input id="hora" type="time" pInputText [(ngModel)]="currentSolicitacao.hora" name="hora" required />
+
+                <label for="status">Status</label>
+                <input id="status" type="text" pInputText [(ngModel)]="currentSolicitacao.status" name="status"
+                    required />
             </div>
-        </p-tabpanel>
-        <p-tabpanel value="1">
-            <h2 class="text-2xl font-bold mb-4">Listagem de Processos</h2>
-            <li>Processo 1</li>
-            <li>Processo 2</li>
-            <li>Processo 3</li>
-            <li>Processo 4</li>
-            <br>
-            <p>(Tela de teste até o momento)</p>
 
-        </p-tabpanel>
+            <div class="field col-12 md:col-4">
+                <label for="hora">Hora</label>
+                <input id="hora" type="time" pInputText [(ngModel)]="currentSolicitacao.hora" name="hora" required />
+            </div>
 
-    </p-tabpanels>
-</p-tabs>
+            <div class="field col-12 md:col-4">
+                <label for="status">Status</label>
+                <input id="status" type="text" pInputText [(ngModel)]="currentSolicitacao.status" name="status"
+                    required />
+            </div>
+
+          
+            <div class="field col-12 md:col-6">
+                <label for="delegacia">Delegacia</label>
+                <input id="delegacia" type="text" pInputText [(ngModel)]="currentSolicitacao.delegacia" name="delegacia"
+                    required />
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label for="cidade">Cidade</label>
+                <input id="cidade" type="text" pInputText [(ngModel)]="currentSolicitacao.cidade" name="cidade"
+                    required />
+            </div>
+
+           
+            <div class="field col-12 md:col-6">
+                <label for="tipo_ocorrencia">Tipo de Ocorrência</label>
+                <input id="tipo_ocorrencia" type="text" pInputText [(ngModel)]="currentSolicitacao.tipo_ocorrencia"
+                    name="tipo_ocorrencia" required />
+            </div>
+
+            <div class="field col-12 md:col-6">
+                <label for="numero_protocolo">Número do Protocolo</label>
+                <input id="numero_protocolo" type="text" pInputText [(ngModel)]="currentSolicitacao.numero_protocolo"
+                    name="numero_protocolo" />
+            </div>
+
+           
+            <div class="field col-12 md:col-6">
+                <label for="perito_responsavel">Perito Responsável</label>
+                <input id="perito_responsavel" type="text" pInputText
+                    [(ngModel)]="currentSolicitacao.perito_responsavel" name="perito_responsavel" />
+            </div>
+
+          
+            <div class="field col-12">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" pInputTextarea [(ngModel)]="currentSolicitacao.observacoes"
+                    name="observacoes"></textarea>
+            </div>
+
+       
+            <div class="col-12 flex justify-content-end gap-2 mt-2">
+                <button pButton type="submit" label="Salvar" icon="pi pi-check" class="p-button-success"></button>
+                <button pButton type="button" label="Cancelar" icon="pi pi-times" class="p-button-secondary"
+                    (click)="cancelCard()"></button>
+            </div>
+        </form>
+    </p-card>
+
+    <hr class="divider">
+
+    <h3 class="list-title">Listagem</h3>
+
+    
+    <div>
+        <p-card *ngFor="let sol of solicitacoes; let i = index" [ngClass]="i % 2 === 0 ? 'card-white' : 'card-blue'">
+    <div class="card-content">
+        <div class="card-content-text">
+            <span><strong>Tipo da Ocorrência:</strong> {{ sol.tipo_ocorrencia }}</span>
+            <span>{{ sol.cidade }} / {{ sol.delegacia }}</span>
+            <span>{{ sol.data }} | {{ sol.hora }}</span>
+            <span><strong>Status:</strong> {{ sol.status }}</span>
+        </div>
+
+        <div class="card-actions">
+            <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning"
+                (click)="editSolicitacao(sol)"></button>
+            <button pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-info"
+                (click)="viewSolicitacao(sol)"></button>
+            <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                (click)="confirmDelete(sol)"></button>
+        </div>
+    </div>
+</p-card>
+    </div>
+
+    
+    <p-dialog header="Confirmação" [(visible)]="showDeleteModal" [modal]="true" [closable]="false">
+        <p>Quer realmente deletar esta solicitação?</p>
+        <div class="flex justify-content-end gap-2 mt-4">
+            <button pButton label="Sim" icon="pi pi-check" class="p-button-danger"
+                (click)="deleteSolicitacao()"></button>
+            <button pButton label="Não" icon="pi pi-times" class="p-button-secondary" (click)="cancelDelete()"></button>
+        </div>
+    </p-dialog>
+</div>
