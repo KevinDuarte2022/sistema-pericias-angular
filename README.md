@@ -1,59 +1,158 @@
-# SistemaPericiasAngular
+# Sistema de Perícias Criminais - Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+## Contexto do Projeto
+Esta aplicação foi desenvolvida como desafio técnico para a vaga de Desenvolvedor Frontend Angular.  
+O objetivo é criar um **dashboard interativo e responsivo** para visualizar e gerenciar solicitações de perícias criminais, consumindo uma API REST local.
 
-## Development server
+A aplicação foi desenvolvida com **Angular 20 Standalone Components**, TypeScript e boas práticas de desenvolvimento, incluindo tratamento de erros, JWT e guards de rota.
 
-To start a local development server, run:
+---
 
+## Tecnologias Utilizadas
+- Angular 20 (Standalone Components)
+- TypeScript
+- PrimeNG e PrimeIcons
+- Chart.js / ng2-charts
+- TailwindCSS
+- Font Awesome
+- RxJS
+- Jasmine + Karma (Testes unitários)
+- Cypress (Testes E2E)
+- Node.js 22 / npm 10
+- Python 3.13 (API)
+
+---
+
+
+
+- Todos os componentes principais (Login, Welcome, Dashboard, Registrations) são **standalone**.  
+- **Lazy loading** implementado nas páginas principais via `loadComponent`.  
+- **AuthService** gerencia autenticação, tokens JWT e perfil do usuário.  
+- **authGuard** protege rotas privadas.  
+
+---
+
+## Funcionalidades Implementadas
+
+- Dashboard interativo com gráficos Chart.js
+- Tela de Welcome com animação de "bonequinho" e texto estilizado
+- Botão pulsante para loading com logo da PEFOCE
+- Interface responsiva (desktop, tablet e mobile)
+- Consumo da API REST
+- Tratamento de erros HTTP (400, 401, 500)
+- Sistema de login/logout com JWT
+- Guards para proteção de rotas
+- Lazy loading de componentes
+- Testes unitários (Jasmine + Karma)
+- Testes E2E (Cypress)
+- Branches: `main` (código final) e `feature/dashboard` (dashboard)
+
+### Diferenciais Implementados:
+- Animações suaves na tela de Welcome
+- Botão de loading estilizado para feedback visual
+- Design UI/UX agradável
+
+---
+
+## Rotas Principais
+| Rota | Componente | Protegida? |
+|------|------------|------------|
+| `/login` | Login | ❌ |
+| `/` | Welcome | ✅ (AuthGuard) |
+| `/dashboard` | Dashboard | ✅ (AuthGuard) |
+| `/registrations` | Registrations | ✅ (AuthGuard) |
+
+---
+
+## Como Rodar o Projeto
+
+### 1. API
 ```bash
+# Ativar venv
+source venv/Scripts/activate
+
+# Rodar a API
+python app.py
+
+# Conferir se API está funcionando
+# GET http://localhost:5000/api/health
+# Retorno esperado:
+# {
+#   "status": "ok",
+#   "message": "API está funcionando"
+# }
+2. Angular
+bash
+Copy code
+# Instalar dependências
+npm install
+
+# Rodar aplicação
 ng serve
-```
+3. Testes
+Unitários (Jasmine + Karma)
+bash
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
 ng test
-```
+E2E (Cypress)
+bash
+Copy code
+# Instalar Cypress
+npm install cypress --save-dev
 
-## Running end-to-end tests
+# Abrir interface do Cypress
+npm run cypress:open
 
-For end-to-end (e2e) testing, run:
+# Executar testes E2E via CLI
+npm run cypress:run
+AuthService (Resumo)
+login(username, password) → autentica e salva token
 
-```bash
-ng e2e
-```
+logout() → limpa token e redireciona para login
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+isLogged() → verifica login
 
-## Additional Resources
+getCurrentUser() → retorna dados do usuário logado
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+authGuard
+Impede acesso às rotas privadas (/, /dashboard, /registrations) sem login
+
+Redireciona automaticamente para /login se não estiver autenticado
+
+Pacotes e Dependências
+Principais Dependências
+@angular/animations, @angular/common, @angular/core, @angular/forms, @angular/router
+
+primeng, primeicons
+
+chart.js, ng2-charts
+
+@fortawesome/fontawesome-free
+
+tailwindcss
+
+DevDependencies
+cypress, jasmine-core, karma, karma-chrome-launcher, karma-coverage, karma-jasmine-html-reporter
+
+Branches e Versionamento
+main → Código final entregue
+
+feature/dashboard → Implementações da dashboard
+
+Commits descritivos 
+
+Observações
+Aplicação desenvolvida standalone (Angular 20) sem módulos.
+
+Animação e interatividade focadas na experiência do usuário.
+
+Código preparado para escala e manutenção futura.
+
+
+
+Contato: 85985911220 
+Desenvolvedor: Kevin Medeiros
+
+
+Repositório GitHub: https://github.com/KevinDuarte2022/sistema-pericias-angular
+
