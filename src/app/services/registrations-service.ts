@@ -14,10 +14,10 @@ export class RegistrationsService {
       'Content-Type': 'application/json'
     });
   }
+getAll(): Observable<any> {
+  return this.http.get(`${this.baseUrl}?page=1&per_page=1000`, { headers: this.getHeaders() });
+}
 
-  getAll(): Observable<any> {
-    return this.http.get(this.baseUrl, { headers: this.getHeaders() });
-  }
 
   create(data: any): Observable<any> {
     return this.http.post(this.baseUrl, data, { headers: this.getHeaders() });
