@@ -1,126 +1,163 @@
 <div>
 
 
-    <h2 class="text-2xl font-bold mb-2">Cadastrar Solicitação</h2>
+  <h2 class="text-2xl font-bold mb-2">Cadastrar Solicitação</h2>
 
 
-    <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-success mb-4"
-        (click)="openNewCard()">
-    </button>
+  <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-success mb-4"
+    (click)="openNewCard()">
+  </button>
 
 
-    <p-card *ngIf="showCard" class="mb-6 p-4 shadow-lg rounded-lg bg-white max-w-full overflow-hidden">
-  <h3 class="text-xl font-bold mb-4">{{ editingSolicitacao ? 'Editar Solicitação' : 'Nova Solicitação' }}</h3>
+  <p-card *ngIf="showCard" class="mb-6 p-4 shadow-lg rounded-lg bg-white max-w-full overflow-hidden">
+    <h3 class="text-xl font-bold mb-4">{{ editingSolicitacao ? 'Editar Solicitação' : 'Nova Solicitação' }}</h3>
 
-  <form (ngSubmit)="saveSolicitacao()" class="space-y-4">
-
-   
-    <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
-      <div class="flex-1 min-w-0">
-        <label class="block text-sm font-medium mb-1" for="tipo_ocorrencia">Tipo de Ocorrência</label>
-        <input id="tipo_ocorrencia" type="text" [(ngModel)]="currentSolicitacao.tipo_ocorrencia" name="tipo_ocorrencia"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-      </div>
-      <div class="flex-1 min-w-0 mt-2 md:mt-0">
-        <label class="block text-sm font-medium mb-1" for="numero_protocolo">Número do Protocolo</label>
-        <input id="numero_protocolo" type="text" [(ngModel)]="currentSolicitacao.numero_protocolo" name="numero_protocolo"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
-    </div>
-
-    
-    <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
-      <div class="flex-1 min-w-0">
-        <label class="block text-sm font-medium mb-1" for="data">Data</label>
-        <input id="data" type="date" [(ngModel)]="currentSolicitacao.data" name="data"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-      </div>
-      <div class="flex-1 min-w-0 mt-2 md:mt-0">
-        <label class="block text-sm font-medium mb-1" for="hora">Hora</label>
-        <input id="hora" type="time" [(ngModel)]="currentSolicitacao.hora" name="hora"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-      </div>
-      <div class="flex-1 min-w-0 mt-2 md:mt-0">
-        <label class="block text-sm font-medium mb-1" for="status">Status</label>
-        <input id="status" type="text" [(ngModel)]="currentSolicitacao.status" name="status"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-      </div>
-    </div>
-
-   
-    <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
-      <div class="flex-1 min-w-0">
-        <label class="block text-sm font-medium mb-1" for="delegacia">Delegacia</label>
-        <input id="delegacia" type="text" [(ngModel)]="currentSolicitacao.delegacia" name="delegacia"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-      </div>
-      <div class="flex-1 min-w-0 mt-2 md:mt-0">
-        <label class="block text-sm font-medium mb-1" for="cidade">Cidade</label>
-        <input id="cidade" type="text" [(ngModel)]="currentSolicitacao.cidade" name="cidade"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-      </div>
-    </div>
-
-   
-    <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
-      <div class="flex-1 min-w-0">
-        <label class="block text-sm font-medium mb-1" for="perito_responsavel">Perito Responsável</label>
-        <input id="perito_responsavel" type="text" [(ngModel)]="currentSolicitacao.perito_responsavel" name="perito_responsavel"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
-      <div class="flex-1 min-w-0 mt-2 md:mt-0">
-        <label class="block text-sm font-medium mb-1" for="observacoes">Observações</label>
-        <textarea id="observacoes" [(ngModel)]="currentSolicitacao.observacoes" name="observacoes"
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-      </div>
-    </div>
-
-    
-    <div class="flex justify-end space-x-2 mt-4 flex-wrap">
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Salvar</button>
-      <button type="button" (click)="cancelCard()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancelar</button>
-    </div>
-
-  </form>
-</p-card>
+    <form (ngSubmit)="saveSolicitacao()" class="space-y-4">
 
 
-    <hr class="divider">
+      <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
+        <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
+          <div class="flex-1 min-w-0">
+            <label class="block text-sm font-medium mb-1" for="tipo_ocorrencia">
+              <span class="text-red-600">*</span> Tipo de Ocorrência
+            </label>
+            <input id="tipo_ocorrencia" type="text" [(ngModel)]="currentSolicitacao.tipo_ocorrencia"
+              name="tipo_ocorrencia"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required />
+          </div>
 
-
-    <!-- Listagem -->
-    <h3 class="list-title">Listagem de Solicitações</h3>
-
-
-    <div>
-        <p-card *ngFor="let sol of solicitacoes; let i = index" [ngClass]="i % 2 === 0 ? 'card-white' : 'card-blue'">
-            <div class="card-content">
-                <div class="card-content-text">
-                    <span><strong>Tipo da Ocorrência:</strong> {{ sol.tipo_ocorrencia }}</span>
-                    <span>{{ sol.cidade }} / {{ sol.delegacia }}</span>
-                    <span>{{ sol.data }} | {{ sol.hora }}</span>
-                    <span><strong>Status:</strong> {{ sol.status }}</span>
-                </div>
-
-                <div class="card-actions">
-                    <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning"
-                        (click)="editSolicitacao(sol)"></button>
-                    <button pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-info"
-                        (click)="viewSolicitacao(sol)"></button>
-                    <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
-                        (click)="confirmDelete(sol)"></button>
-                </div>
-            </div>
-        </p-card>
-    </div>
-
-
-    <p-dialog header="Confirmação" [(visible)]="showDeleteModal" [modal]="true" [closable]="false">
-        <p>Quer realmente deletar esta solicitação?</p>
-        <div class="flex justify-content-end gap-2 mt-4">
-            <button pButton label="Sim" icon="pi pi-check" class="p-button-danger"
-                (click)="deleteSolicitacao()"></button>
-            <button pButton label="Não" icon="pi pi-times" class="p-button-secondary" (click)="cancelDelete()"></button>
+          <div class="flex-1 min-w-0 mt-2 md:mt-0">
+            <label class="block text-sm font-medium mb-1" for="numero_protocolo">Número do Protocolo</label>
+            <input id="numero_protocolo" type="text" [(ngModel)]="currentSolicitacao.numero_protocolo"
+              name="numero_protocolo"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
         </div>
-    </p-dialog>
+
+        <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
+          <div class="flex-1 min-w-0">
+            <label class="block text-sm font-medium mb-1" for="data">
+              <span class="text-red-600">*</span> Data
+            </label>
+            <input id="data" type="date" [(ngModel)]="currentSolicitacao.data" name="data"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required />
+          </div>
+
+          <div class="flex-1 min-w-0 mt-2 md:mt-0">
+            <label class="block text-sm font-medium mb-1" for="hora">
+              <span class="text-red-600">*</span> Hora
+            </label>
+            <input id="hora" type="time" [(ngModel)]="currentSolicitacao.hora" name="hora"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required />
+          </div>
+
+          <div class="flex-1 min-w-0 mt-2 md:mt-0">
+            <label class="block text-sm font-medium mb-1" for="status">
+              <span class="text-red-600">*</span> Status
+            </label>
+            <input id="status" type="text" [(ngModel)]="currentSolicitacao.status" name="status"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required />
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
+          <div class="flex-1 min-w-0">
+            <label class="block text-sm font-medium mb-1" for="delegacia">
+              <span class="text-red-600">*</span> Delegacia
+            </label>
+            <input id="delegacia" type="text" [(ngModel)]="currentSolicitacao.delegacia" name="delegacia"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required />
+          </div>
+
+          <div class="flex-1 min-w-0 mt-2 md:mt-0">
+            <label class="block text-sm font-medium mb-1" for="cidade">
+              <span class="text-red-600">*</span> Cidade
+            </label>
+            <input id="cidade" type="text" [(ngModel)]="currentSolicitacao.cidade" name="cidade"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required />
+          </div>
+        </div>
+      </div>
+
+
+      <div class="flex flex-col md:flex-row md:space-x-4 w-full flex-wrap">
+        <div class="flex-1 min-w-0">
+          <label class="block text-sm font-medium mb-1" for="perito_responsavel">Perito Responsável</label>
+          <input id="perito_responsavel" type="text" [(ngModel)]="currentSolicitacao.perito_responsavel"
+            name="perito_responsavel"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="flex-1 min-w-0 mt-2 md:mt-0">
+          <label class="block text-sm font-medium mb-1" for="observacoes">Observações</label>
+          <textarea id="observacoes" [(ngModel)]="currentSolicitacao.observacoes" name="observacoes"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+      </div>
+
+
+      <div class="flex justify-end space-x-2 mt-4 flex-wrap">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Salvar</button>
+        <button type="button" (click)="cancelCard()"
+          class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancelar</button>
+      </div>
+
+    </form>
+  </p-card>
+
+
+  <hr class="divider">
+
+
+  <!-- Listagem -->
+  <h3 class="list-title">Listagem de Solicitações</h3>
+
+
+  <div>
+    <p-card *ngFor="let sol of solicitacoes; let i = index" [ngClass]="i % 2 === 0 ? 'card-white' : 'card-blue'">
+      <div class="card-content">
+        <div class="card-content-text">
+          <span><strong>Tipo da Ocorrência:</strong> {{ sol.tipo_ocorrencia }}</span>
+          <span>{{ sol.cidade }} / {{ sol.delegacia }}</span>
+          <span>{{ sol.data }} | {{ sol.hora }}</span>
+          <span><strong>Status:</strong> {{ sol.status }}</span>
+        </div>
+
+        <div class="card-actions">
+          <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning"
+            (click)="editSolicitacao(sol)"></button>
+          <button pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-info"
+            (click)="viewSolicitacao(sol)"></button>
+          <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
+            (click)="confirmDelete(sol)"></button>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+
+  <p-dialog header="Confirmação" [(visible)]="showDeleteModal" [modal]="true" [closable]="false">
+    <p>Quer realmente deletar esta solicitação?</p>
+    <div class="flex justify-content-end gap-2 mt-4">
+      <button pButton label="Sim" icon="pi pi-check" class="p-button-danger" (click)="deleteSolicitacao()"></button>
+      <button pButton label="Não" icon="pi pi-times" class="p-button-secondary" (click)="cancelDelete()"></button>
+    </div>
+  </p-dialog>
+
+
+  <p-dialog [(visible)]="alertDialogVisible" modal="true" [closable]="true" [dismissableMask]="true"
+    [style]="{width: '350px'}" [position]="'center'" [baseZIndex]="10000">
+    <ng-template pTemplate="header">
+      {{ alertTitle }}
+    </ng-template>
+    <p>{{ alertMessage }}</p>
+    <ng-template pTemplate="footer">
+      <button pButton type="button" label="OK" (click)="alertDialogVisible=false"></button>
+    </ng-template>
+  </p-dialog>
 </div>
